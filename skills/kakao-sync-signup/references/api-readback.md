@@ -89,6 +89,13 @@ See `channel-steps.md` Step 5 (`GET /v2/api/talk/channels`).
    kept for 5 years under 전자상거래법, what to anonymize, audit rows) is the owner's
    decision, not the agent's. Ask for it in the intake (section D).
    The service also needs the 대표 어드민 키 in its server env. Only the app Owner can see it.
+   Move it with the no-print pattern in `console-steps.md` Step 7.
+   Testing: do not press [전송] in 도구 > 웹훅 테스트 > 연결 해제 on a live app. It sends the
+   signed-in Kakao account's own member ID (seen 2026-11-26), so a working handler deletes the
+   tester's real membership. Test instead with the real key and a member ID that does not exist:
+   expect 200 and an "unknown user" log line; a wrong `app_id` must give 401.
+   Register it at 앱 > 웹훅 > 연결 해제 웹훅 > [웹훅 등록]: 상태 사용함, 메서드 GET (the dialog default),
+   URL. Read the card back after saving.
 3. Unlinking does not remove the channel friendship. A member who withdraws keeps getting
    channel messages until they block the channel (kakaosync/faq).
 
