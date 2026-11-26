@@ -35,8 +35,11 @@ If the console looks different, trust the live console and the docs, then update
   when the user says yes.
 - **Irreversible values.** A channel's 검색용 ID and a developer channel's name can never change.
   Confirm them in the intake, not during the run.
-- **Secrets.** Never put the REST API key, client secret or admin key in a screenshot, report or
-  repo. Do not open a key detail page unless the step needs it.
+- **Secrets.** Never put the REST API key, client secret or admin key in a screenshot, report,
+  repo or your own context. On key pages (앱 > 플랫폼 키, 앱 > 어드민 키) read only through
+  `safeSnapshot` / `safeText` in `scripts/console-helpers.mjs`, which mask key-like strings. When a
+  server env needs a key, move it shell-to-store without printing (`console-steps.md` Step 7).
+  Do not open a key page unless the step needs it.
 - **Personal data.** Kakao rejects any evidence or document with unmasked personal data. Mask with
   the tested methods in `references/evidence-pack.md`, scan with `scripts/scan-shots.swift`, and
   look at each image once.

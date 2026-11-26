@@ -125,6 +125,17 @@ Each step lists who acts, and whether Kakao reviews it.
   gives KOE006. The doc says the path cannot carry arbitrary parameters.
 - The REST API key has client secret ON by default. Token requests must send
   `client_secret`.
+- This page shows the REST API key and the client secret in clear text. Read it only through
+  `H.safeSnapshot(page)` or `H.safeText(page)` from `console-helpers.mjs`; never print a raw
+  `page.snapshot()` or body text here. Do not read the client secret at all unless the service's
+  server env needs it. Then move it without printing (the same pattern works for the admin key on
+  앱 > 어드민 키):
+  1. In the browser script, read the value inside `page.evaluate` and print one marker line,
+     `KEY=<value>`.
+  2. In the shell, capture that output in a variable: `OUT=$(ego-browser nodejs <<'EOF' … EOF)`,
+     then `V=$(printf '%s\n' "$OUT" | sed -n 's/^KEY=//p')`. Print only `${#V}`.
+  3. Pipe it straight to the store: `printf %s "$V" | vercel env add NAME production` (or the
+     host's equivalent), and the password manager. `unset V` at the end.
 
 ### Step 8. 대표 채널
 
@@ -233,7 +244,8 @@ The test app proves the consent screen. It does not replace the live app's revie
 - A floating 맨 위로 button (`#float_btn`) covers controls near the bottom right. Center the control first.
 - Find consent rows by the exact ID cell. "name" also matches "profile_nickname".
 - Choosing 필수 동의 reveals a 카카오계정으로 수집 후 제공 switch (`button[value=on]`). Not offered for phone.
-- The REST API key page shows the client secret in clear text. Use `clean-shot.mjs` there.
+- The REST API key page shows the client secret in clear text. Use `clean-shot.mjs` for pictures
+  and `H.safeSnapshot` / `H.safeText` for reading (Step 7).
 - Kakao Business (partner center) renders inside shadow DOM, and its wizards are same-origin iframes
   (`/wizard/partner?...`). `document.body.innerText` returns almost nothing; use the snapshot tree or walk
   shadow roots. `page.fill` may refuse Korean in its inputs; type English, or click and use the keyboard.

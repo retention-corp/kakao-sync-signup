@@ -7,6 +7,23 @@ export function assertApp(url, appId) {
   if (!url.includes(`/console/app/${appId}/`)) throw new Error(`refusing to write: page is not app ${appId}`);
 }
 
+// Key pages (앱 > 플랫폼 키, 앱 > 어드민 키) show the REST API key, client secret and admin key in clear
+// text. Never print page.snapshot() or body text from them unmasked: the value would enter the model
+// context. Use these instead. Kakao keys are 32 hex characters; client secrets are 32 alphanumerics.
+export function maskSecrets(text) {
+  return String(text)
+    .replace(/\b[0-9a-f]{32}\b/gi, (m) => `<key:${m.length}>`)
+    .replace(/\b[A-Za-z0-9]{24,}\b/g, (m) => `<secret:${m.length}>`);
+}
+
+export async function safeSnapshot(page, options) {
+  return maskSecrets(await page.snapshot(options));
+}
+
+export async function safeText(page, selector = "body") {
+  return maskSecrets(await page.evaluate((s) => document.querySelector(s)?.innerText ?? "", selector));
+}
+
 // Scroll an element inside a dialog or a list into view. Console dialogs and dropdowns scroll on
 // their own; the browser's automatic scroll does not reach inside them ("not visible in the viewport").
 export async function scrollTextIntoView(page, text, scope = "body") {

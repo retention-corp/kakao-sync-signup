@@ -56,6 +56,14 @@
 
 ## 설치
 
+[skills CLI](https://skills.sh)로 설치해요.
+
+```bash
+npx skills add retention-corp/kakao-sync-signup
+```
+
+직접 받아서 연결해도 돼요.
+
 ```bash
 git clone https://github.com/retention-corp/kakao-sync-signup.git
 ln -s "$(pwd)/kakao-sync-signup/skills/kakao-sync-signup" ~/.claude/skills/kakao-sync-signup
