@@ -1,0 +1,12 @@
+Kakao Sync precheck: auto-fde (app None)
+FAIL  site.reachable                unreachable https://auto-fde.retn.kr/: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+FAIL  signup.reachable              unreachable https://auto-fde.retn.kr/: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+FAIL  channel.linked                no channel_public_id: 간편가입 needs a business channel linked to the app (kakaologin/prerequisite)
+WARN  scope.phone_empty             phone_number 필수: users without KakaoTalk still have no number; the app must handle an empty value
+FAIL  privacy.reachable             unreachable https://auto-fde.retn.kr/privacy/: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+FAIL  terms.terms_20261125.url      unreachable https://auto-fde.retn.kr/terms/: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+FAIL  terms.privacy_20261125.url    unreachable https://auto-fde.retn.kr/privacy/: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+WARN  terms.ad_consent_20261125.title_ko_chars  characters outside Hangul/keyboard set: · (the console accepted '·' in a live app's term title)
+FAIL  terms.ad_consent_20261125.url  unreachable https://auto-fde.retn.kr/terms/ad-consent/: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+
+Summary: PASS 0  WARN 2  FAIL 7

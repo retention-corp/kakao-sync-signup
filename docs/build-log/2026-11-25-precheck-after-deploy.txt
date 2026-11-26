@@ -1,0 +1,20 @@
+Kakao Sync precheck: auto-fde (app 1665131)
+PASS  site.reachable                HTTP 200 https://auto-fde.retn.kr/
+PASS  signup.reachable              HTTP 200 https://auto-fde.retn.kr/
+WARN  scope.phone_empty             phone_number 필수: users without KakaoTalk still have no number; the app must handle an empty value
+PASS  privacy.reachable             HTTP 200 https://auto-fde.retn.kr/privacy/
+PASS  privacy.purpose_signup        mentions 회원가입
+PASS  privacy.kakao                 mentions 카카오
+PASS  privacy.item.account_email    found '이메일'
+PASS  privacy.item.name             found '이름'
+PASS  privacy.item.phone_number     found '전화번호'
+PASS  privacy.item.plusfriends      found '카카오톡 채널'
+PASS  privacy.required_marked       has '필수' marking; confirm each item's condition by eye
+PASS  privacy.optional_marked       has '선택' marking
+PASS  terms.terms_20261125.url      HTTP 200 https://auto-fde.retn.kr/terms/
+PASS  terms.privacy_20261125.url    HTTP 200 https://auto-fde.retn.kr/privacy/
+WARN  terms.ad_consent_20261125.title_ko_chars  characters outside Hangul/keyboard set: · (the console accepted '·' in a live app's term title)
+PASS  terms.ad_consent_20261125.url  HTTP 200 https://auto-fde.retn.kr/terms/ad-consent/
+PASS  terms.ad_consent_20261125.ad_page  term page mentions 광고성 정보
+
+Summary: PASS 15  WARN 2  FAIL 0
