@@ -25,6 +25,15 @@ GET https://kauth.kakao.com/oauth/authorize
   `scope=account_email,phone_number,name,plusfriends`; gender and birthyear were 선택 in the
   console and in its privacy policy, but no member was ever asked for them. Grep the
   authorize URL code for `scope` in phase 6, and make code, console and policy agree.
+- Never "fix" that by adding the missing items to `scope`. A `scope` request is an
+  additional-consent request: "사용자는 필요한 동의항목에 동의하거나 동의하지 않고 취소 버튼을
+  눌러 동의 화면을 닫을 수 있습니다 … 사용자가 취소한 경우 access_denied" (kakaologin/utilize,
+  동의항목 추가 동의 요청 3). Seen 2026-11-27 on a live app: after `gender,birthyear` were
+  added, an existing member saw "(Required) Consent to the provision of personal information
+  by Kakao — Gender, Birth Year". A member who declines cannot log in. The change was
+  reverted the same day. To collect a 선택 item, test the no-`scope` path in a test app with a
+  member who already exists, and ask the optional item later with a separate
+  additional-consent button that the member can skip.
 - `service_terms`: only to ask for specific terms later; it must include at least one
   필수 term or no screen appears. Do not send it on first sign-up.
 - With OpenID Connect ON, any `scope` request must include `openid`.
